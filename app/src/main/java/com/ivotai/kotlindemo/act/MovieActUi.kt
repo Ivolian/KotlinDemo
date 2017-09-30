@@ -1,23 +1,27 @@
-package com.ivotai.kotlindemo
+package com.ivotai.kotlindemo.act
 
 import android.graphics.Color
+import android.support.v7.widget.RecyclerView
 import android.util.TypedValue
 import android.view.Gravity
+import android.widget.TextView
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 
-class MainActUi : AnkoComponent<MainAct> {
+class MovieActUi : AnkoComponent<MovieAct> {
 
-    override fun createView(ui: AnkoContext<MainAct>) = with(ui) {
+    lateinit var tvStatus: TextView
+    lateinit var rvMovie: RecyclerView
+
+    override fun createView(ui: AnkoContext<MovieAct>) = with(ui) {
 
         verticalLayout {
-            textView {
+            tvStatus = textView {
                 backgroundColor = Color.GREEN
-                text = "电影"
                 setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18f)
                 gravity = Gravity.CENTER
             }.lparams(width = matchParent, height = dip(100))
-            recyclerView()
+            rvMovie = recyclerView()
         }
 
     }
