@@ -1,6 +1,5 @@
 package com.ivotai.kotlindemo.act
 
-import android.graphics.Color
 import android.support.v7.widget.RecyclerView
 import android.util.TypedValue
 import android.view.Gravity
@@ -17,7 +16,7 @@ class MovieActUi : AnkoComponent<MovieAct> {
 
         verticalLayout {
             tvStatus = textView {
-                backgroundColor = Color.GREEN
+//                backgroundColor = context.getColor(android.R.color.darker_gray)
                 setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18f)
                 gravity = Gravity.CENTER
             }.lparams(width = matchParent, height = dip(100))

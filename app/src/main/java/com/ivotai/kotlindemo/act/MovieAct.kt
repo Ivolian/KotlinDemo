@@ -9,12 +9,14 @@ import com.ivotai.kotlindemo.app.Info
 import com.ivotai.kotlindemo.data.Movie
 import com.ivotai.kotlindemo.data.MovieService
 import com.ivotai.kotlindemo.data.Response
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.dip
 import org.jetbrains.anko.setContentView
 import retrofit2.Call
 import retrofit2.Callback
 import javax.inject.Inject
 
-class MovieAct(private val actUi: MovieActUi = MovieActUi()) : AppCompatActivity(), MovieActBehavior {
+class MovieAct(private val actUi: MovieActUi = MovieActUi()) : AppCompatActivity(), MovieActBehavior, AnkoLogger {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +30,7 @@ class MovieAct(private val actUi: MovieActUi = MovieActUi()) : AppCompatActivity
 
     override fun getMovies() {
         loadingNow()
+
         val title = "哥斯拉"
         movieService.get(Info.APP_KEY, title).enqueue(object : Callback<Response<Movie>> {
             override fun onResponse(call: Call<Response<Movie>>, response: retrofit2.Response<Response<Movie>>) {
@@ -39,6 +42,7 @@ class MovieAct(private val actUi: MovieActUi = MovieActUi()) : AppCompatActivity
                 loadingFail()
             }
         })
+
     }
 
     override fun renderMovies(movies: List<Movie>) {

@@ -1,7 +1,6 @@
 package com.ivotai.kotlindemo
 
 
-import org.junit.Assert.assertEquals
 import org.junit.Test
 
 /**
@@ -13,11 +12,11 @@ class ExampleUnitTest {
     @Test
     @Throws(Exception::class)
     fun addition_isCorrect() {
-        assertEquals(4, (2 + 2).toLong())
-
-//        AppComponentHolder.appComponent.inject()
-
+        var list = listOf(Person("Li"))
+        var s = list[0]
     }
 
 
 }
+
+class Person(var name: String)

@@ -19,7 +19,9 @@ class MovieAdapterUi : AnkoComponent<ViewGroup> {
                 tvTitle = textView {
                     text = "he"
                     textSize = 16f
+
                 }
+
             }
         }
     }
