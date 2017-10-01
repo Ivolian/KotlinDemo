@@ -12,11 +12,19 @@ class ExampleUnitTest {
     @Test
     @Throws(Exception::class)
     fun addition_isCorrect() {
-        var list = listOf(Person("Li"))
-        var s = list[0]
+
+
     }
 
+    class Person {
+        var name: String
+        var age: Int
 
+        constructor(name: String, age: Int) {
+            this.name = name
+            this.age = age
+        }
+
+    }
 }
 
-class Person(var name: String)

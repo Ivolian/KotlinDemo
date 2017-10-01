@@ -9,10 +9,5 @@ interface MovieActBehavior {
 
     fun renderMovies(movies:List<Movie>)
 
-    fun loadingNow()
-
-    fun loadingFinish()
-
-    fun loadingFail()
 
 }

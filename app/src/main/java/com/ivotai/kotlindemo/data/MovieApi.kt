@@ -1,15 +1,15 @@
 package com.ivotai.kotlindemo.data
 
 
-import retrofit2.Call
+import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 
-interface MovieService {
+interface MovieApi {
 
     @GET("index")
     fun get(@Query(value = "key") appKey: String,
-            @Query(value = "title") title: String): Call<Response<Movie>>
+            @Query(value = "title") title: String): Observable<Response<Movie>>
 
 }
