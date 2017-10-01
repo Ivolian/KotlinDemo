@@ -1,25 +1,18 @@
 package com.ivotai.kotlindemo.adapter
 
-import android.support.v7.widget.RecyclerView
-import android.view.ViewGroup
-import com.ivotai.kotlindemo.adapter.base.UiViewHolder
+import android.widget.ImageView
+import com.bumptech.glide.Glide
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.BaseViewHolder
+import com.ivotai.kotlindemo.R
 import com.ivotai.kotlindemo.data.Movie
 
-class MovieAdapter(private var movies: List<Movie>) : RecyclerView.Adapter<UiViewHolder<MovieAdapterUi>>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UiViewHolder<MovieAdapterUi> {
-        return UiViewHolder(parent, MovieAdapterUi())
+class MovieAdapter(data: List<Movie>) : BaseQuickAdapter<Movie, BaseViewHolder>(R.layout.item_movie, data) {
+
+    override fun convert(helper: BaseViewHolder, item: Movie) {
+        var imageView = helper.getView<ImageView>(R.id.image)
+        Glide.with(mContext).load(item.poster).into(imageView)
     }
-
-    override fun onBindViewHolder(holder: UiViewHolder<MovieAdapterUi>, position: Int) {
-        val movie = movies[position]
-        with(holder.ui) {
-            tvTitle.text = movie.title
-        }
-    }
-
-    override fun getItemCount(): Int = movies.size
 
 }
-
-

@@ -1,71 +1,55 @@
 package com.ivotai.kotlindemo.act
 
 import android.os.Bundle
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.widget.Toast
 import com.ivotai.kotlin.AppComponentHolder
+import com.ivotai.kotlindemo.MoviePresenter
 import com.ivotai.kotlindemo.R
 import com.ivotai.kotlindemo.adapter.MovieAdapter
-import com.ivotai.kotlindemo.app.Info
 import com.ivotai.kotlindemo.data.Movie
-import com.ivotai.kotlindemo.data.MovieService
-import com.ivotai.kotlindemo.data.Response
 import com.ivotai.kotlindemo.dependency.bindView
-import io.reactivex.Observer
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
+import com.ivotai.kotlindemo.respository.MovieRepositoryImpl
 import javax.inject.Inject
 
-class MovieAct : AppCompatActivity(), MovieActBehavior {
+class MovieAct : AppCompatActivity(), MovieView {
+
+    @Inject
+    lateinit var movieRepository: MovieRepositoryImpl
+    lateinit var moviePresenter: MoviePresenter
+
+    private val recycleView: RecyclerView by bindView(R.id.recyclerView)
+    private val swipeRefreshLayout: SwipeRefreshLayout by bindView(R.id.swipeRefreshLayout)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AppComponentHolder.appComponent.inject(this)
         setContentView(R.layout.act_movie)
-        getMovies()
+        AppComponentHolder.appComponent.inject(this)
+        moviePresenter = MoviePresenter(this, movieRepository)
+        moviePresenter.onCreate()
+        swipeRefreshLayout.setOnRefreshListener { moviePresenter.onRefresh() }
     }
 
-    @Inject
-    lateinit var movieApi: MovieApi
-
-    override fun getMovies() {
-
-
-        val title = "哥斯拉"
-        movieApi.get(Info.APP_KEY, title)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : Observer<Response<Movie>> {
-                    override fun onError(e: Throwable) {
-                        ""
-                    }
-
-                    override fun onComplete() {
-                        ""
-                    }
-
-                    override fun onSubscribe(d: Disposable) {
-                        ""
-                    }
-
-                    override fun onNext(t: Response<Movie>) {
-                        renderMovies(t.result)
-                    }
-                })
-
-
+    override fun showRefresh() {
+        swipeRefreshLayout.isRefreshing = true
     }
 
-    private val recycleView: RecyclerView by bindView(R.id.recyclerView)
+    override fun showError() {
+        Toast.makeText(this, "加载失败", Toast.LENGTH_SHORT).show()
+    }
 
-    override fun renderMovies(movies: List<Movie>) {
+    override fun stopRefresh() {
+        swipeRefreshLayout.isRefreshing = false
+    }
+
+    override fun render(movies: List<Movie>) {
         with(recycleView) {
             layoutManager = LinearLayoutManager(this@MovieAct)
             adapter = MovieAdapter(movies)
         }
     }
-
 
 }

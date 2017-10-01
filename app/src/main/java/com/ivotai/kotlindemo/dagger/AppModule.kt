@@ -3,6 +3,7 @@ package com.ivotai.kotlin
 import com.google.gson.Gson
 import com.ivotai.kotlindemo.app.Info
 import com.ivotai.kotlindemo.data.MovieApi
+import com.ivotai.kotlindemo.respository.MovieRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -16,7 +17,7 @@ import java.util.concurrent.TimeUnit
 class AppModule {
 
     @Provides
-    fun okHttpClient(): OkHttpClient =  OkHttpClient.Builder()
+    fun okHttpClient(): OkHttpClient = OkHttpClient.Builder()
             .connectTimeout(60, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)
 //            .addInterceptor(makeHeadersInterceptor())
@@ -45,8 +46,13 @@ class AppModule {
             .build()
 
     @Provides
-    fun movieService(retrofit: Retrofit): MovieApi {
+    fun movieApi(retrofit: Retrofit): MovieApi {
         return retrofit.create(MovieApi::class.java)
+    }
+
+    @Provides
+    fun movieRepository(movieApi: MovieApi): MovieRepositoryImpl {
+        return MovieRepositoryImpl(movieApi)
     }
 
 }
