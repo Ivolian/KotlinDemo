@@ -2,8 +2,9 @@ package com.ivotai.kotlin
 
 import com.google.gson.Gson
 import com.ivotai.kotlindemo.app.Info
-import com.ivotai.kotlindemo.data.MovieApi
-import com.ivotai.kotlindemo.respository.MovieRepositoryImpl
+import com.ivotai.kotlindemo.movie.model.api.MovieApi
+import com.ivotai.kotlindemo.movie.model.respository.MovieRepository
+import com.ivotai.kotlindemo.movie.model.respository.MovieRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -51,7 +52,7 @@ class AppModule {
     }
 
     @Provides
-    fun movieRepository(movieApi: MovieApi): MovieRepositoryImpl {
+    fun movieRepository(movieApi: MovieApi): MovieRepository {
         return MovieRepositoryImpl(movieApi)
     }
 

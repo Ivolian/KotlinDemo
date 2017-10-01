@@ -1,4 +1,4 @@
-package com.ivotai.kotlindemo.data
+package com.ivotai.kotlindemo.movie.model.entity
 
 
 class Movie(

@@ -1,4 +1,4 @@
-package com.ivotai.kotlindemo.act
+package com.ivotai.kotlindemo.movie.view
 
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
@@ -7,18 +7,18 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.Toast
 import com.ivotai.kotlin.AppComponentHolder
-import com.ivotai.kotlindemo.MoviePresenter
 import com.ivotai.kotlindemo.R
-import com.ivotai.kotlindemo.adapter.MovieAdapter
-import com.ivotai.kotlindemo.data.Movie
-import com.ivotai.kotlindemo.dependency.bindView
-import com.ivotai.kotlindemo.respository.MovieRepositoryImpl
+import com.ivotai.kotlindemo.dependencies.bindView
+import com.ivotai.kotlindemo.movie.model.entity.Movie
+import com.ivotai.kotlindemo.movie.model.respository.MovieRepository
+import com.ivotai.kotlindemo.movie.presenter.MoviePresenter
+import com.ivotai.kotlindemo.movie.view.adapter.MovieAdapter
 import javax.inject.Inject
 
 class MovieAct : AppCompatActivity(), MovieView {
 
     @Inject
-    lateinit var movieRepository: MovieRepositoryImpl
+    lateinit var movieRepository: MovieRepository
     lateinit var moviePresenter: MoviePresenter
 
     private val recycleView: RecyclerView by bindView(R.id.recyclerView)
@@ -37,12 +37,12 @@ class MovieAct : AppCompatActivity(), MovieView {
         swipeRefreshLayout.isRefreshing = true
     }
 
-    override fun showError() {
-        Toast.makeText(this, "加载失败", Toast.LENGTH_SHORT).show()
-    }
-
     override fun stopRefresh() {
         swipeRefreshLayout.isRefreshing = false
+    }
+
+    override fun showError() {
+        Toast.makeText(this, "加载失败", Toast.LENGTH_SHORT).show()
     }
 
     override fun render(movies: List<Movie>) {

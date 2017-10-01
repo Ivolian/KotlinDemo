@@ -1,4 +1,4 @@
-package com.ivotai.kotlindemo.dependency
+package com.ivotai.kotlindemo.dependencies
 
 import android.app.Activity
 import android.app.Dialog
