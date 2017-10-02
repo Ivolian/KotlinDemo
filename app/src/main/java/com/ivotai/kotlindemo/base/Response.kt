@@ -1,4 +1,4 @@
-package com.ivotai.kotlindemo.app
+package com.ivotai.kotlindemo.base
 
 
 class Response<out T>(

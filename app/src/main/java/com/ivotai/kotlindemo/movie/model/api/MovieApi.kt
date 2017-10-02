@@ -1,7 +1,7 @@
 package com.ivotai.kotlindemo.movie.model.api
 
 
-import com.ivotai.kotlindemo.app.Response
+import com.ivotai.kotlindemo.base.Response
 import com.ivotai.kotlindemo.movie.model.entity.Movie
 import io.reactivex.Observable
 import retrofit2.http.GET

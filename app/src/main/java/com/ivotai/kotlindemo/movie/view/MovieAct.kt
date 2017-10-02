@@ -1,13 +1,12 @@
 package com.ivotai.kotlindemo.movie.view
 
-import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.Toast
 import com.ivotai.kotlin.AppComponentHolder
 import com.ivotai.kotlindemo.R
+import com.ivotai.kotlindemo.base.BaseAct
 import com.ivotai.kotlindemo.dependencies.bindView
 import com.ivotai.kotlindemo.movie.model.entity.Movie
 import com.ivotai.kotlindemo.movie.model.respository.MovieRepository
@@ -16,7 +15,13 @@ import com.ivotai.kotlindemo.movie.view.adapter.MovieAdapter
 import javax.inject.Inject
 
 
-class MovieAct : AppCompatActivity(), MovieView {
+class MovieAct : BaseAct(), MovieView {
+
+    override val layoutResId = R.layout.act_movie
+
+    override fun injectDependencies() {
+        AppComponentHolder.appComponent.inject(this)
+    }
 
     @Inject lateinit var repository: MovieRepository
     private lateinit var presenter: MoviePresenter
@@ -24,10 +29,7 @@ class MovieAct : AppCompatActivity(), MovieView {
     private val recycleView: RecyclerView by bindView(R.id.recyclerView)
     private val swipeRefreshLayout: SwipeRefreshLayout by bindView(R.id.swipeRefreshLayout)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.act_movie)
-        AppComponentHolder.appComponent.inject(this)
+    override fun init() {
         presenter = MoviePresenter(this, repository)
         presenter.onViewCreated()
         swipeRefreshLayout.setOnRefreshListener { presenter.onRefresh() }

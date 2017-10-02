@@ -1,9 +1,9 @@
-package com.ivotai.kotlindemo.app
+package com.ivotai.kotlindemo.base
 
 import io.reactivex.disposables.CompositeDisposable
 
 
-abstract class BasePresenter :Presenter{
+abstract class BasePresenter : Presenter {
 
     protected var subscriptions = CompositeDisposable()
 
