@@ -1,7 +1,6 @@
 package com.ivotai.kotlin
 
 import com.google.gson.Gson
-import com.ivotai.kotlindemo.app.Info
 import com.ivotai.kotlindemo.movie.model.api.MovieApi
 import com.ivotai.kotlindemo.movie.model.respository.MovieRepository
 import com.ivotai.kotlindemo.movie.model.respository.MovieRepositoryImpl
@@ -38,9 +37,11 @@ class AppModule {
 //        else HttpLoggingInterceptor.Level.NONE
 //    }
 
+    private val baseUrl = "http://v.juhe.cn/movie/"
+
     @Provides
     fun retrofit(client: OkHttpClient): Retrofit = Retrofit.Builder()
-            .baseUrl(Info.BASE_URL)
+            .baseUrl(baseUrl)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create(Gson()))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

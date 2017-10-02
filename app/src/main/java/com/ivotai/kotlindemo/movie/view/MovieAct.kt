@@ -15,11 +15,11 @@ import com.ivotai.kotlindemo.movie.presenter.MoviePresenter
 import com.ivotai.kotlindemo.movie.view.adapter.MovieAdapter
 import javax.inject.Inject
 
+
 class MovieAct : AppCompatActivity(), MovieView {
 
-    @Inject
-    lateinit var movieRepository: MovieRepository
-    lateinit var moviePresenter: MoviePresenter
+    @Inject lateinit var repository: MovieRepository
+    private lateinit var presenter: MoviePresenter
 
     private val recycleView: RecyclerView by bindView(R.id.recyclerView)
     private val swipeRefreshLayout: SwipeRefreshLayout by bindView(R.id.swipeRefreshLayout)
@@ -28,9 +28,14 @@ class MovieAct : AppCompatActivity(), MovieView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.act_movie)
         AppComponentHolder.appComponent.inject(this)
-        moviePresenter = MoviePresenter(this, movieRepository)
-        moviePresenter.onCreate()
-        swipeRefreshLayout.setOnRefreshListener { moviePresenter.onRefresh() }
+        presenter = MoviePresenter(this, repository)
+        presenter.onViewCreated()
+        swipeRefreshLayout.setOnRefreshListener { presenter.onRefresh() }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.onViewDestroyed()
     }
 
     override fun showRefresh() {

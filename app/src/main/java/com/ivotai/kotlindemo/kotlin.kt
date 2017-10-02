@@ -7,7 +7,9 @@ package com.ivotai.kotlindemo
     2. 用 implementation 替代 compile
        http://blog.csdn.net/soslinken/article/details/73114637
     3. anko layout 被否决了
-       因为他没有 layoutId，很多库用不了，多类型怎么处理
-    4.
+       因为它没有 layoutId，很多库用不了，多类型怎么处理
+    4. 没有用 DTO
+       https://www.linkedin.com/pulse/create-data-transfer-objects-dtos-ahmed-magdy
+    5
 
  */

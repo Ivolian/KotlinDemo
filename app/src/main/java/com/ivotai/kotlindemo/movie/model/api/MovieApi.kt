@@ -12,6 +12,6 @@ interface MovieApi {
 
     @GET("index")
     fun getMovies(@Query(value = "key") appKey: String,
-                  @Query(value = "title") title: String): Observable<Response<Movie>?>
+                  @Query(value = "title") title: String): Observable<Response<Movie>>
 
 }

@@ -1,42 +1,29 @@
 package com.ivotai.kotlindemo.movie.presenter
 
-import com.ivotai.kotlindemo.app.Response
-import com.ivotai.kotlindemo.movie.model.entity.Movie
+import com.ivotai.kotlindemo.app.BasePresenter
 import com.ivotai.kotlindemo.movie.model.respository.MovieRepository
 import com.ivotai.kotlindemo.movie.view.MovieView
-import io.reactivex.Observer
-import io.reactivex.disposables.Disposable
+import io.reactivex.rxkotlin.plusAssign
+import io.reactivex.rxkotlin.subscribeBy
 
 
-class MoviePresenter(private var movieView: MovieView, private var movieRepository: MovieRepository) {
+class MoviePresenter(private var view: MovieView, private var repository: MovieRepository) : BasePresenter() {
 
-    fun onCreate() {
-        movieView.showRefresh()
-        getMovies()
+    fun onViewCreated() {
+        view.showRefresh()
+        loadMovies()
     }
 
     fun onRefresh() {
-        getMovies()
+        loadMovies()
     }
 
-    private fun getMovies() = with(movieView) {
-        movieRepository.getMovies("哥斯拉")
-                .subscribe(object : Observer<Response<Movie>?> {
-                    override fun onError(e: Throwable) {
-                        showError()
-                    }
-
-                    override fun onComplete() {
-                        stopRefresh()
-                    }
-
-                    override fun onSubscribe(d: Disposable) {
-                    }
-
-                    override fun onNext(t: Response<Movie>) {
-                        t.result.let {  render(it) }
-                    }
-                })
+    private fun loadMovies() = with(view) {
+        subscriptions += repository.getMovies("哥斯拉").subscribeBy(
+                onNext = { it.result.let { render(it) } },
+                onError = { showError() },
+                onComplete = { stopRefresh() }
+        )
     }
 
 }
