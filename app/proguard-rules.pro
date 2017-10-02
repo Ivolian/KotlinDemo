@@ -19,3 +19,34 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# retrofit
+-dontwarn okio.**
+-dontwarn javax.annotation.**
+
+# okhttp3
+-dontwarn okhttp3.**
+#-dontwarn okio.**
+#-dontwarn javax.annotation.**
+
+# glide
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public class * extends com.bumptech.glide.AppGlideModule
+-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+
+# BRVAH
+-keep class com.chad.library.adapter.** {
+*;
+}
+-keep public class * extends com.chad.library.adapter.base.BaseQuickAdapter
+-keep public class * extends com.chad.library.adapter.base.BaseViewHolder
+-keepclassmembers  class **$** extends com.chad.library.adapter.base.BaseViewHolder {
+     <init>(...);
+}
+#https://github.com/CymChad/BaseRecyclerViewAdapterHelper/issues/1250
+-keep class * extends com.chad.library.adapter.base.BaseViewHolder{
+*;
+}

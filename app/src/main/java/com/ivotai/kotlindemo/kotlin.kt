@@ -13,3 +13,10 @@ package com.ivotai.kotlindemo
     5  kotlin-android-extensions
        http://www.cnblogs.com/figozhg/p/7400435.html
  */
+
+/*
+    https://github.com/google/dagger
+    https://github.com/square/retrofit
+    https://github.com/bumptech/glide
+    https://github.com/CymChad/BaseRecyclerViewAdapterHelper
+ */

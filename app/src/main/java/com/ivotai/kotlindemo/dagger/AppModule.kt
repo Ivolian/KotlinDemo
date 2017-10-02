@@ -48,13 +48,9 @@ class AppModule {
             .build()
 
     @Provides
-    fun movieApi(retrofit: Retrofit): MovieApi {
-        return retrofit.create(MovieApi::class.java)
-    }
+    fun movieApi(retrofit: Retrofit): MovieApi = retrofit.create(MovieApi::class.java)
 
     @Provides
-    fun movieRepository(movieApi: MovieApi): MovieRepository {
-        return MovieRepositoryImpl(movieApi)
-    }
+    fun movieRepository(movieApi: MovieApi): MovieRepository = MovieRepositoryImpl(movieApi)
 
 }

@@ -31,8 +31,6 @@ class MovieAct : BaseAct(), MovieView {
             layoutManager = LinearLayoutManager(this@MovieAct)
             adapter = movieAdapter
         }
-        moviePresenter.onViewCreated()
-        swipeRefreshLayout.setOnRefreshListener { moviePresenter.onRefresh() }
         etSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
             }
@@ -44,6 +42,8 @@ class MovieAct : BaseAct(), MovieView {
                 moviePresenter.onSearchChanged(p0.toString())
             }
         })
+        swipeRefreshLayout.setOnRefreshListener { moviePresenter.onRefresh() }
+        moviePresenter.onViewCreated()
     }
 
     override fun onDestroy() {
