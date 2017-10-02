@@ -1,6 +1,12 @@
 package com.ivotai.kotlindemo.movie.model.entity
 
+import android.annotation.SuppressLint
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+
+@SuppressLint("ParcelCreator")
+@Parcelize
 class Movie(
         val movieid: String, //10641
         val rating: String, //7.3
@@ -20,4 +26,4 @@ class Movie(
         val type: String, //null
         val release_date: String, //19980518
         val also_known_as: String //酷斯拉怪兽哥斯拉
-)
+) : Parcelable

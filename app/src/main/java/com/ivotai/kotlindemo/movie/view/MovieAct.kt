@@ -1,17 +1,17 @@
 package com.ivotai.kotlindemo.movie.view
 
-import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.Toast
 import com.ivotai.kotlin.AppComponentHolder
 import com.ivotai.kotlindemo.R
 import com.ivotai.kotlindemo.base.BaseAct
-import com.ivotai.kotlindemo.dependencies.bindView
 import com.ivotai.kotlindemo.movie.model.entity.Movie
 import com.ivotai.kotlindemo.movie.model.respository.MovieRepository
 import com.ivotai.kotlindemo.movie.presenter.MoviePresenter
 import com.ivotai.kotlindemo.movie.view.adapter.MovieAdapter
+import kotlinx.android.synthetic.main.act_movie.*
 import javax.inject.Inject
 
 
@@ -23,21 +23,32 @@ class MovieAct : BaseAct(), MovieView {
         AppComponentHolder.appComponent.inject(this)
     }
 
-    @Inject lateinit var repository: MovieRepository
-    private lateinit var presenter: MoviePresenter
-
-    private val recycleView: RecyclerView by bindView(R.id.recyclerView)
-    private val swipeRefreshLayout: SwipeRefreshLayout by bindView(R.id.swipeRefreshLayout)
+    @Inject lateinit var movieRepository: MovieRepository
+    private val moviePresenter by lazy { MoviePresenter(this, movieRepository) }
 
     override fun init() {
-        presenter = MoviePresenter(this, repository)
-        presenter.onViewCreated()
-        swipeRefreshLayout.setOnRefreshListener { presenter.onRefresh() }
+        with(recyclerView) {
+            layoutManager = LinearLayoutManager(this@MovieAct)
+            adapter = movieAdapter
+        }
+        moviePresenter.onViewCreated()
+        swipeRefreshLayout.setOnRefreshListener { moviePresenter.onRefresh() }
+        etSearch.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                moviePresenter.onSearchChanged(p0.toString())
+            }
+        })
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        presenter.onViewDestroyed()
+        moviePresenter.onViewDestroyed()
     }
 
     override fun showRefresh() {
@@ -52,11 +63,10 @@ class MovieAct : BaseAct(), MovieView {
         Toast.makeText(this, "加载失败", Toast.LENGTH_SHORT).show()
     }
 
+    private val movieAdapter by lazy { MovieAdapter() }
+
     override fun render(movies: List<Movie>) {
-        with(recycleView) {
-            layoutManager = LinearLayoutManager(this@MovieAct)
-            adapter = MovieAdapter(movies)
-        }
+        movieAdapter.setNewData(movies)
     }
 
 }

@@ -9,17 +9,25 @@ import io.reactivex.rxkotlin.subscribeBy
 
 class MoviePresenter(private var view: MovieView, private var repository: MovieRepository) : BasePresenter() {
 
+    private val defaultTitle = "哥斯拉"
+    private var title = defaultTitle
+
     fun onViewCreated() {
-        view.showRefresh()
-        loadMovies()
+        loadMovies(title)
     }
 
     fun onRefresh() {
-        loadMovies()
+        loadMovies(title)
     }
 
-    private fun loadMovies() = with(view) {
-        subscriptions += repository.getMovies("哥斯拉").subscribeBy(
+    fun onSearchChanged(title: String) {
+        this.title =title
+        loadMovies(title)
+    }
+
+    private fun loadMovies(title: String) = with(view) {
+        showRefresh()
+        subscriptions += repository.getMovies(title).subscribeBy(
                 onNext = { it.result.let { render(it) } },
                 onError = { showError() },
                 onComplete = { stopRefresh() }

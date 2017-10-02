@@ -10,6 +10,6 @@ package com.ivotai.kotlindemo
        因为它没有 layoutId，很多库用不了，多类型怎么处理
     4. 没有用 DTO
        https://www.linkedin.com/pulse/create-data-transfer-objects-dtos-ahmed-magdy
-    5
-
+    5  kotlin-android-extensions
+       http://www.cnblogs.com/figozhg/p/7400435.html
  */
