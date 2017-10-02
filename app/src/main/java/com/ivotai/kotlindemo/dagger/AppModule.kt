@@ -1,9 +1,6 @@
 package com.ivotai.kotlin
 
 import com.google.gson.Gson
-import com.ivotai.kotlindemo.movie.model.api.MovieApi
-import com.ivotai.kotlindemo.movie.model.respository.MovieRepository
-import com.ivotai.kotlindemo.movie.model.respository.MovieRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -50,11 +47,6 @@ class AppModule {
 
 
 
-        @Provides
-        fun movieApi(retrofit: Retrofit): MovieApi = retrofit.create(MovieApi::class.java)
-
-        @Provides
-        fun movieRepository(movieApi: MovieApi): MovieRepository = MovieRepositoryImpl(movieApi)
 
 
 }
