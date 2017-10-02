@@ -20,7 +20,8 @@ class MovieAct : BaseAct(), MovieView {
     override val layoutResId = R.layout.act_movie
 
     override fun injectDependencies() {
-        AppComponentHolder.appComponent.inject(this)
+        AppComponentHolder.movieCom.inject(this)
+//        AppComponentHolder.appComponent.inject2(this)
     }
 
     @Inject lateinit var movieRepository: MovieRepository

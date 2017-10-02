@@ -12,8 +12,9 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-
 @Module
+
+//@Module(subcomponents = arrayOf(MovieComponent::class))
 class AppModule {
 
     @Provides
@@ -47,10 +48,13 @@ class AppModule {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
 
-    @Provides
-    fun movieApi(retrofit: Retrofit): MovieApi = retrofit.create(MovieApi::class.java)
 
-    @Provides
-    fun movieRepository(movieApi: MovieApi): MovieRepository = MovieRepositoryImpl(movieApi)
+
+        @Provides
+        fun movieApi(retrofit: Retrofit): MovieApi = retrofit.create(MovieApi::class.java)
+
+        @Provides
+        fun movieRepository(movieApi: MovieApi): MovieRepository = MovieRepositoryImpl(movieApi)
+
 
 }

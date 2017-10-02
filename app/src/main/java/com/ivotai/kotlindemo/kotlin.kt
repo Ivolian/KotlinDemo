@@ -12,6 +12,8 @@ package com.ivotai.kotlindemo
        https://www.linkedin.com/pulse/create-data-transfer-objects-dtos-ahmed-magdy
     5  kotlin-android-extensions
        http://www.cnblogs.com/figozhg/p/7400435.html
+
+       @provider static ?
  */
 
 /*
