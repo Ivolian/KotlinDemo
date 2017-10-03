@@ -4,7 +4,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Toast
-import com.ivotai.kotlin.ComponentsHolder
+import com.ivotai.kotlindemo.app.ComponentsHolder
 import com.ivotai.kotlindemo.R
 import com.ivotai.kotlindemo.base.BaseAct
 import com.ivotai.kotlindemo.movie.model.entity.Movie

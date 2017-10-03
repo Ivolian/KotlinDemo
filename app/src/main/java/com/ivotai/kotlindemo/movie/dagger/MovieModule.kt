@@ -1,4 +1,4 @@
-package com.ivotai.kotlindemo.movie
+package com.ivotai.kotlindemo.movie.dagger
 
 import com.ivotai.kotlindemo.movie.model.api.MovieApi
 import com.ivotai.kotlindemo.movie.model.respository.MovieRepository
@@ -11,6 +11,7 @@ import retrofit2.Retrofit
 @Module
 class MovieModule{
 
+    @Movie
     @Provides
     fun movieApi(retrofit: Retrofit): MovieApi = retrofit.create(MovieApi::class.java)
 
