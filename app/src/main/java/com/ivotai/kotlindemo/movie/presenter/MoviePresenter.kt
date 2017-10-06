@@ -7,25 +7,14 @@ import com.ivotai.kotlindemo.movie.view.MovieView
 
 class MoviePresenter(private var view: MovieView, private var repository: MovieRepository) : BasePresenter() {
 
-    private val defaultTitle = "哥斯拉"
-    private var title = defaultTitle
-
     fun onViewCreated() {
-        loadMovies(title)
+        loadMovies()
     }
 
     fun onRefresh() {
-        loadMovies(title)
+        loadMovies()
     }
 
-    fun onSearchChanged(title: String) {
-        this.title = title
-        loadMovies(title)
-    }
-
-    private fun loadMovies(title: String) = with(view) {
-        //        showRefresh()
-        repository.getMovies(title).subscribe { render(it) }
-    }
+    private fun loadMovies() = repository.get().subscribe { view.render(it) }
 
 }

@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-class AppModule {
+class NetworkModule {
 
     @Singleton
     @Provides
@@ -19,11 +19,9 @@ class AppModule {
             .connectTimeout(60, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)
 //            .addInterceptor(makeHeadersInterceptor())
-//            .addInterceptor(makeAddSecurityQueryInterceptor())
-//            .addInterceptor(makeLoggingInterceptor())
             .build()
 
-    private val baseUrl = "http://v.juhe.cn/movie/"
+    private val baseUrl = "http://apis.juhe.cn/train/"
 
     @Singleton
     @Provides
@@ -33,6 +31,5 @@ class AppModule {
             .addConverterFactory(GsonConverterFactory.create(Gson()))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
-
 
 }

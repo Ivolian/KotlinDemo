@@ -6,7 +6,6 @@ import io.reactivex.Observable
 
 interface MovieRepository {
 
-     fun getMovies(title:String): Observable<List<Movie>>
-
+     fun get(): Observable<List<Movie>>
 
 }

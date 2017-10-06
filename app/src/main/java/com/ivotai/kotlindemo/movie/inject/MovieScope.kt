@@ -1,4 +1,4 @@
-package com.ivotai.kotlindemo.movie.dagger
+package com.ivotai.kotlindemo.movie.inject
 
 import javax.inject.Scope
 

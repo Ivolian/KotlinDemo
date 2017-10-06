@@ -13,9 +13,6 @@ import javax.inject.Singleton
 @Module
 class BoxModule(val app: App) {
 
-//    private val boxStore =
-//            MyObjectBox.builder().androidContext(app).build()
-
     @Singleton
     @Provides
     fun boxStore(): BoxStore = MyObjectBox.builder().androidContext(app).build()
