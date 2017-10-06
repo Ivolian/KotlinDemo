@@ -1,14 +1,27 @@
 package com.ivotai.kotlindemo.app
 
-import com.ivotai.kotlindemo.app.dagger.AppComponent
+import com.ivotai.kotlin.AppModule
+import com.ivotai.kotlindemo.app.dagger.BoxModule
 import com.ivotai.kotlindemo.app.dagger.DaggerAppComponent
-import com.ivotai.kotlindemo.movie.dagger.MovieComponent
 
 
 object ComponentsHolder {
 
-    private val appComponent: AppComponent by lazy { DaggerAppComponent.create() }
+    lateinit var app: App
 
-    val movieComponent: MovieComponent by lazy { appComponent.getMovieComponent() }
+    fun init(app: App){
+        this.app = app
+    }
+
+    private val appComponent by lazy {
+        DaggerAppComponent.builder()
+                .appModule(AppModule())
+                .boxModule(BoxModule(app))
+                .build()
+    }
+
+    val movieComponent by lazy {
+        appComponent.getMovieComponent()
+    }
 
 }

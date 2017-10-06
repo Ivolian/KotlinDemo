@@ -2,11 +2,10 @@
 
 buildscript {
     ext.kotlin_version = '1.1.51'
-    ext.anko_version = '0.10.1'
     ext.support_version = '26.1.0'
     ext.dagger_version = '2.11'
     ext.retrofit_version = '2.3.0'
-    ext.objectboxVersion = '1.0.1'
+    ext.objectbox_version = '1.1.0'
     ext.rxjava_version = "2.1.4"
     ext.rxandroid_version = '2.0.1'
     ext.rxkotlin_version = '2.1.0'
@@ -20,17 +19,13 @@ buildscript {
         maven { url "http://objectbox.net/beta-repo/" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0-beta6'
+        classpath 'com.android.tools.build:gradle:3.0.0-beta7'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "io.objectbox:objectbox-gradle-plugin:$objectboxVersion"
+        classpath "io.objectbox:objectbox-gradle-plugin:$objectbox_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
-
-
-
 }
-
 
 allprojects {
     repositories {

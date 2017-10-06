@@ -1,7 +1,6 @@
 package com.ivotai.kotlin
 
 import com.google.gson.Gson
-import com.ivotai.kotlindemo.app.dagger.App
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -9,15 +8,14 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-import javax.inject.Named
+import javax.inject.Singleton
 
 @Module
 class AppModule {
 
-    @Named("t")
-    @App
+    @Singleton
     @Provides
-    fun okHttpClient(): OkHttpClient = OkHttpClient.Builder()
+    fun okHttpClient(): OkHttpClient =  OkHttpClient.Builder()
             .connectTimeout(60, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)
 //            .addInterceptor(makeHeadersInterceptor())
@@ -25,23 +23,11 @@ class AppModule {
 //            .addInterceptor(makeLoggingInterceptor())
             .build()
 
-//    fun makeHeadersInterceptor() = Interceptor { chain -> // 1
-//        chain.proceed(chain.request().newBuilder()
-//                .addHeader("Accept", "application/json")
-//                .addHeader("Accept-Language", "en")
-//                .addHeader("Content-Type", "application/json")
-//                .build())
-
-//    fun makeLoggingInterceptor() = HttpLoggingInterceptor().apply {
-//        level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
-//        else HttpLoggingInterceptor.Level.NONE
-//    }
-
     private val baseUrl = "http://v.juhe.cn/movie/"
 
-    @App
+    @Singleton
     @Provides
-    fun retrofit(@Named("t") client: OkHttpClient): Retrofit = Retrofit.Builder()
+    fun retrofit(client: OkHttpClient): Retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create(Gson()))
