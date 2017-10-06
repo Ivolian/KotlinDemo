@@ -52,9 +52,6 @@ dependencies {
     kapt "com.github.bumptech.glide:compiler:$glide_version"
     implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:$BRVAH_version"
     compile 'io.objectbox:objectbox-rxjava:0.9.8-RC4'
-//    compile "io.objectbox:objectbox-android:$objectbox_version"
-//    compile "io.objectbox:objectbox-kotlin:$objectbox_version"
-
     testImplementation 'junit:junit:4.12'
     androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
