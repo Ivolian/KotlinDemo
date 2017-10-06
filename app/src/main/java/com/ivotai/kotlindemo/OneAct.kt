@@ -1,9 +1,8 @@
 package com.ivotai.kotlindemo
 
 import android.support.v7.widget.LinearLayoutManager
-import android.widget.Toast
 import com.ivotai.kotlindemo.app.ComponentsHolder
-import com.ivotai.kotlindemo.base.BaseAct
+import com.ivotai.kotlindemo.app.base.view.BaseAct
 import com.ivotai.kotlindemo.movie.model.entity.Movie
 import com.ivotai.kotlindemo.movie.model.respository.MovieRepository
 import com.ivotai.kotlindemo.movie.model.respository.TrainRepository
@@ -25,8 +24,8 @@ class OneAct : BaseAct(), MovieView, TrainView {
     override val layoutResId = R.layout.act_one
 
     override fun injectDependencies() {
-        movieRepository = ComponentsHolder.movieComponent.getMovieRepository()
-        trainRepository = ComponentsHolder.trainComponent.getTrainRepository()
+        movieRepository = ComponentsHolder.movieComponent.getRepository()
+        trainRepository = ComponentsHolder.trainComponent.getRepository()
     }
 
 
@@ -43,7 +42,6 @@ class OneAct : BaseAct(), MovieView, TrainView {
     private val movieAdapter = MovieAdapter()
 
     override fun init() {
-
         // init recyclerView
         with(recyclerView) {
             layoutManager = LinearLayoutManager(this@OneAct)
@@ -51,7 +49,6 @@ class OneAct : BaseAct(), MovieView, TrainView {
         }
 
         // movie interaction
-        swipeRefreshLayout.setOnRefreshListener { moviePresenter.onRefresh() }
         moviePresenter.onViewCreated()
 
         // train interaction
@@ -77,20 +74,9 @@ class OneAct : BaseAct(), MovieView, TrainView {
 
     // ===== movieView =====
 
-    override fun showRefresh() {
-        swipeRefreshLayout.isRefreshing = true
-    }
-
-    override fun stopRefresh() {
-        swipeRefreshLayout.isRefreshing = false
-    }
-
-    override fun showError() {
-        Toast.makeText(this, "加载失败", Toast.LENGTH_SHORT).show()
-    }
-
     override fun render(movies: List<Movie>) {
         movieAdapter.setNewData(movies)
     }
+
 
 }

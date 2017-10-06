@@ -8,9 +8,6 @@ import io.reactivex.Observable
 
 class MovieRepositoryImpl(private val box: Box<Movie>) : MovieRepository {
 
-    override fun get(): Observable<List<Movie>> {
-        val query = box.query().build()
-        return RxQuery.observable(query)
-    }
+    override fun get(): Observable<List<Movie>> = RxQuery.observable(box.query().build())
 
 }

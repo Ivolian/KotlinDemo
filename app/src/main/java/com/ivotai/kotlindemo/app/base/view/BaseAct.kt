@@ -1,4 +1,4 @@
-package com.ivotai.kotlindemo.base
+package com.ivotai.kotlindemo.app.base.view
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

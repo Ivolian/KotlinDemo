@@ -7,5 +7,5 @@ import dagger.Subcomponent
 @TrainScope
 @Subcomponent(modules = arrayOf(TrainModule::class))
 interface TrainComponent {
-    fun getTrainRepository(): TrainRepository
+    fun getRepository(): TrainRepository
 }

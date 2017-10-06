@@ -1,5 +1,6 @@
-package com.ivotai.kotlindemo.movie.inject
+package com.ivotai.kotlindemo.movie.inject.module
 
+import com.ivotai.kotlindemo.movie.inject.scope.MovieScope
 import com.ivotai.kotlindemo.movie.model.entity.Movie
 import com.ivotai.kotlindemo.movie.model.respository.MovieRepository
 import com.ivotai.kotlindemo.movie.model.respository.MovieRepositoryImpl
@@ -10,10 +11,6 @@ import io.objectbox.Box
 
 @Module
 class MovieModule {
-
-//    @TrainScope
-//    @Provides
-//    fun movieApi(retrofit: Retrofit): MovieApi = retrofit.create(MovieApi::class.java)
 
     @MovieScope
     @Provides

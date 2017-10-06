@@ -1,8 +1,8 @@
-package com.ivotai.kotlindemo.movie.inject
+package com.ivotai.kotlindemo.app.inject.scope
 
 import javax.inject.Scope
 
 @Scope
 @MustBeDocumented
 @Retention(AnnotationRetention.RUNTIME)
-annotation class MovieScope
+annotation class AppScope

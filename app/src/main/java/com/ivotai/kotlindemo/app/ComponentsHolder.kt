@@ -1,16 +1,16 @@
 package com.ivotai.kotlindemo.app
 
 import com.ivotai.kotlin.NetworkModule
-import com.ivotai.kotlindemo.app.dagger.BoxModule
-import com.ivotai.kotlindemo.app.dagger.DaggerAppComponent
+import com.ivotai.kotlindemo.app.inject.BoxModule
+import com.ivotai.kotlindemo.app.inject.component.DaggerAppComponent
 
 
 object ComponentsHolder {
 
-    lateinit var app: App
+    private lateinit var app: App
 
     fun init(app: App) {
-        this.app = app
+        ComponentsHolder.app = app
     }
 
     private val appComponent by lazy {
@@ -28,6 +28,5 @@ object ComponentsHolder {
     val trainComponent by lazy {
         appComponent.getTrainComponent()
     }
-
 
 }

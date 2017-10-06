@@ -1,17 +1,19 @@
 package com.ivotai.kotlindemo.train.presenter
 
-import com.ivotai.kotlindemo.base.BasePresenter
+import com.ivotai.kotlindemo.app.base.presenter.BasePresenter
 import com.ivotai.kotlindemo.movie.model.respository.TrainRepository
 import com.ivotai.kotlindemo.train.view.TrainView
+import io.reactivex.rxkotlin.plusAssign
+
 
 class TrainPresenter(private var view: TrainView, private var repository: TrainRepository) : BasePresenter() {
 
-    fun onViewCreated() {
-        loadTrains()
+    override fun onViewCreated() {
+        subscriptions += loadTrains()
     }
 
-    private fun loadTrains() = repository.get("G4").subscribe {
-        view.render(it.result.train_info)
-    }
+    private val name = "G4"
+
+    private fun loadTrains() = repository.get(name).subscribe { view.render(it) }
 
 }

@@ -8,12 +8,12 @@ import javax.inject.Inject
 class DataGenerator {
 
     @Inject
-    lateinit var boxMove: Box<Movie>
+    lateinit var box: Box<Movie>
 
     fun generateMovies() {
-        ComponentsHolder.movieComponent.inject(this)
-        boxMove.removeAll()
-        boxMove.put(listOf(Movie(name = "好看的电影"), Movie(name = "有趣的电影")))
+        box = ComponentsHolder.movieComponent.getBox()
+        box.removeAll()
+        box.put(listOf(Movie(name = "好看的电影"), Movie(name = "有趣的电影")))
     }
 
 }
